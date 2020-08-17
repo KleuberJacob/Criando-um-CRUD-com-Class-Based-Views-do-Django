@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load humanize %}  <! Colocamos na INSTALLED_APPS do Django e estamos colocando aqui pois apresentaremos valores >
+{% block content %}
+    <div class="row">
+        <h1>Produtos</h1>  <! Nome do cabeçalho h1 >
+        <table class="table table-striped">  <! Criando uma tabela na página HTML >
+            <thead>  <! Corpo da tabela >
+                <tr>
+                    <th scope="col">#</th>  <! ID do elemento >
+                    <th scope="col">Nome</th>  <! Nome do elemento >
+                    <th scope="col">Preço</th>  <! Preço do elemento >
+                    <th scope="col">Ação</th>  <! Coluna açao onde ficarao presentes os botoes de atualizar e deletar  >
+                    <! os produtos >
+                </tr>
+            </thead>
+            <tbody>
+                {% for produto in produtos %}  <! Iterando sob cada um dos produtos cadastrados >
+                    <tr>
+                        <td>{{ produto.id }}</td>
+                        <td>{{ produto.nome }}</td>
+                        <td>R$ {{ produto.preco | intcomma }}</td>  <! |=pippe  O termo (intcomma) é uma funçao
+                # do Humanize (ele vai formatar com pontos e virgulas de acordo com a lingua da aplicacao) >
+                        <td>
+                            <a class="btn btn-warning" href="{% url 'upd_produto' produto.pk %}">Editar</a>
+                            <a class="btn btn-danger" href="{% url 'del_produto' produto.pk %}">Deletar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}  # Como teremos botoes carregamos o Bootstrap4
+{% block content %}
+    <form method="post">  <! Inserindo um formulário com método Post (Inserçao de dados) >
+        {% csrf_token %}  <! Todo formúlario no Django deve possuir uma chave {% csrf_token %} >
+        <p>Tem certeza de que deseja deletar o produto "{{ object }}"?</p>
+        {% buttons %}
+            <button type="submit" class="btn btn-danger">Confirmar</button>
+            <button type="button" class="btn btn-warning">
+                <a href="{% url 'index' %}">Cancelar</a>
+            </button>
+        {% endbuttons %}
+    </form>
+{% endblock %}
